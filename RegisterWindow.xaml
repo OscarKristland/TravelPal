@@ -59,7 +59,7 @@
             x:Name="lbCountry"
             Grid.Column="4"
             Grid.Row="2"
-            Content="Country of origin"
+            Content="Country"
             FontWeight="Bold"
             FontSize="15"
             HorizontalContentAlignment="Center"
@@ -104,6 +104,7 @@
             x:Name="cbCountry"
             Grid.Column="4"
             Grid.Row="3"
+            SelectionChanged="cbCountry_SelectionChanged"
             />
         
 

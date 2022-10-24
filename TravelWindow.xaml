@@ -48,7 +48,47 @@
             Content="Sign Out"
             FontWeight="Bold"
             FontSize="20"
-            Margin="10" Click="btnSignout_Click" 
+            Margin="10" 
+            Click="btnSignout_Click" 
+            />
+        <Button
+            x:Name="btnUser"
+            Grid.Column="1"
+            Grid.Row="5"
+            Content="Account Info"
+            FontWeight="Bold"
+            FontSize="20"
+            Margin="10" 
+            Click="btnSignout_Click" 
+            />
+        <Button
+            x:Name="btnAddTravel"
+            Grid.Column="0"
+            Grid.Row="2"
+            Content="Add Travel"
+            FontWeight="Bold"
+            FontSize="20"
+            Margin="10" 
+            Click="btnSignout_Click" 
+            />
+        <Button
+            x:Name="btnDetails"
+            Grid.Column="0"
+            Grid.Row="3"
+            Content="Travel Details"
+            FontWeight="Bold"
+            FontSize="20"
+            Margin="10" 
+            />
+        <Button
+            x:Name="btnInfo"
+            Grid.Column="2"
+            Grid.Row="5"
+            Content="Info"
+            FontWeight="Bold"
+            FontSize="20"
+            Margin="10"
+            
             />
     </Grid>
 </Window>

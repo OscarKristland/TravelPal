@@ -38,13 +38,16 @@ namespace TravelPal
             this.userManager = userManager;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-
-            string[] country = Enum.GetNames(typeof(AllCountries));
-
-            foreach (string var in country)
+            //Loading the combobox with items from the enum AllCountries
+            foreach(AllCountries countries in Enum.GetValues(typeof(AllCountries)))
             {
-                cbCountry.Items.Add(country);
+                cbCountry.Items.Add(countries.ToString());
             }
+        }
+
+        private void cbCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Spelar denna någon roll?
         }
 
 
@@ -66,14 +69,9 @@ namespace TravelPal
 
             if(String.IsNullOrEmpty(txtUsername.Text) || String.IsNullOrEmpty(txtPassword.Text) || String.IsNullOrEmpty(txtConfirmPassword.Text))
             {
-
-                //txtUsername.Text == || txtPassword.Text == "" || txtConfirmPassword.Text == ""
-                //Trim
                 //shouldn't work to set it as empy
                 MessageBox.Show("Please enter a valid username//password or the confirm password and password do not align");
 
-
-               
             }
             else if (txtUsername.Text.Length < 3)
             {
@@ -103,5 +101,7 @@ namespace TravelPal
 
             
         }
+
+        
     }
 }

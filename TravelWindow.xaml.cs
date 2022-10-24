@@ -22,6 +22,7 @@ namespace TravelPal
     {
         private UserManager userManager;
         private User user;
+       
 
         public TravelWindow(UserManager userManager, User user)
         {
