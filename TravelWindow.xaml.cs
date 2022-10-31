@@ -41,8 +41,6 @@ namespace TravelPal
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             lblUsername.Content = user.Username;
-
-            
         }
 
         private void btnSignout_Click(object sender, RoutedEventArgs e)
@@ -78,10 +76,8 @@ namespace TravelPal
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
             //If clicked the item should have
-            AddTravelWindow addTravelWindow = new();
+            AddTravelWindow addTravelWindow = new(userManager);
             addTravelWindow.Show();
         }
-
-        //lbl username . content user . username
     }
 }

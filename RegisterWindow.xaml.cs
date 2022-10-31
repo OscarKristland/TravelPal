@@ -69,6 +69,10 @@ namespace TravelPal
                 MessageBox.Show("Please enter a valid username//password or the confirm password and password do not align");
 
             }
+            else if (cbCountry.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a country");
+            }
             else if (txtUsername.Text.Length < 3)
             {
                 //if length > 3 = can't log in either

@@ -27,10 +27,13 @@ namespace TravelPal.Managers
         public UserManager()
         {
             User albin = new("Gandalf", "password", AllCountries.Sweden);
+
+            users.Add(albin);
             //users.Add(albin);
             //SignedInUser = albin;
 
             User admin = new("admin", "admin", AllCountries.Switzerland);
+            users.Add(admin);
         }
 
         public List<User> GetAllUsers()

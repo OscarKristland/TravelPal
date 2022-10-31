@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TravelPal.Countries;
 using TravelPal.Interface;
+using TravelPal.Models;
 
 namespace TravelPal.Managers
 {/// <summary>
@@ -18,7 +19,7 @@ namespace TravelPal.Managers
         public string Password { get; set; }
         public AllCountries Location { get; set; }
 
-        //public List<Travel> travels = new();
+        public List<Travel> travels = new();
 
         public User(string username, string password, AllCountries location)
         {

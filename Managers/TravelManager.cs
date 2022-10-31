@@ -4,19 +4,19 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TravelPal.Countries;
+using TravelPal.Models;
 
 namespace TravelPal.Managers
 {
     public class TravelManager
     {
+        public List<Travel> travels = new();
 
-        public void AddTravel()
+        public void AddTravel(string destination,string tripOrVacation,int passengers, AllCountries countryDestination, string tripType)
         {
             //Method to create a travel destination
-            string destination;
-            string passengers;
-
-            //variablerna som behövs är destination, passengers och country
+            
         }
         //Ska få med från user och därmed usermanager?
         //+ travels: List<Travel>
