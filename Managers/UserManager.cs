@@ -3,24 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using TravelPal.Countries;
 using TravelPal.Interface;
 using TravelPal.Models;
 
 namespace TravelPal.Managers
 {
-    public class UserManager : IUser
+    public class UserManager
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
+        /// <summary>
+        /// 
+        /// TODO
+        /// Fixa så att gandalf kan logga in
+        /// 
+        /// 
+        /// </summary>
 
         private List<User> users = new();
 
+        public IUser SignedInUser { get; set; }
+
         public UserManager()
         {
-            User albin = new();
-            albin.Username = "Gandalf";
-            albin.Password = "password";
-            users.Add(albin);
+            User albin = new("Gandalf", "password", AllCountries.Sweden);
+            //users.Add(albin);
+            //SignedInUser = albin;
+
+            User admin = new("admin", "admin", AllCountries.Switzerland);
         }
 
         public List<User> GetAllUsers()
@@ -28,11 +38,9 @@ namespace TravelPal.Managers
             return users;
         }
 
-        public void AddUser(string username, string password)
+        public void AddUser(string username, string password, AllCountries location)
         {
-            User user = new();
-            user.Username = username;
-            user.Password = password;
+            User user = new(username, password, location);
 
             users.Add(user);
         }

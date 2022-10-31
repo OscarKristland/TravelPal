@@ -27,6 +27,9 @@ namespace TravelPal
         public MainWindow()
         {
             InitializeComponent();
+
+            this.userManager = new();
+
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
@@ -61,17 +64,11 @@ namespace TravelPal
                     // Logga in
                     isFoundUser = true;
 
-                    if (user is User)
-                    {
                         //Show a user window
-                        TravelWindow travelWindow = new(userManager, user);
-                        travelWindow.Show();
-                        Close();
-                    }
-                    else if (user is Admin)
-                    {
-                        //Show an admin window
-                    }
+                    userManager.SignedInUser = user;
+                    TravelWindow travelWindow = new(userManager);
+                    travelWindow.Show();
+                    Close();
                 }
             }
 

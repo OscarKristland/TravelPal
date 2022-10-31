@@ -24,8 +24,7 @@ namespace TravelPal
     /// 
     /// TODO
     /// 
-    /// Make the register only work if pass and username is longer than 3 and 5 letters
-    /// Make it go back to mainwindow for  both cancel and register
+    /// Make sure there can't be two users with the same username
     /// 
     /// </summary>
     public partial class RegisterWindow : Window
@@ -45,18 +44,13 @@ namespace TravelPal
             }
         }
 
-        private void cbCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //Spelar denna någon roll?
-        }
-
 
         //If you don't want to register you can click cancel, should be sent back to main window
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             //Closer this window and go back to the main window
             
-            MainWindow mainWindow = new();
+            MainWindow mainWindow = new(userManager);
             mainWindow.Show();
             Close();
         }
@@ -66,6 +60,8 @@ namespace TravelPal
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
+            string locationString = cbCountry.SelectedItem as string;
+            AllCountries location = (AllCountries)Enum.Parse(typeof(AllCountries), locationString); // Parsa en sträng i en enum till enumvarianten
 
             if(String.IsNullOrEmpty(txtUsername.Text) || String.IsNullOrEmpty(txtPassword.Text) || String.IsNullOrEmpty(txtConfirmPassword.Text))
             {
@@ -91,14 +87,14 @@ namespace TravelPal
             else
             {
                 //User is added to a list with their individual username and password
-                this.userManager.AddUser(username, password);
+                this.userManager.AddUser(username, password, location);
 
                 MainWindow mainWindow = new(userManager);
                 mainWindow.Show();
 
                 Close();
             }
-
+            
             
         }
 

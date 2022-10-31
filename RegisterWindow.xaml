@@ -40,6 +40,7 @@
             Grid.Row="2"
             Content="Username:"
             FontSize="20"
+            HorizontalAlignment="Right"
             />
         <Label
             x:Name="lbPassword"
@@ -47,13 +48,16 @@
             Grid.Row="3"
             Content="Password:"
             FontSize="20"
+            HorizontalAlignment="Right"
             />
         <Label
             x:Name="lbConfirmPassword"
-            Grid.Column="2"
+            Grid.Column="1"
             Grid.Row="4"
+            Grid.ColumnSpan="2"
             Content="Confirm Password:"
             FontSize="20"
+            HorizontalAlignment="Right"
             />
         <Label
             x:Name="lbCountry"
@@ -97,14 +101,14 @@
             Content="Register"
             FontWeight="Bold"
             FontSize="20"
-            Margin="10" Click="btnRegister_Click"
+            Margin="10" 
+            Click="btnRegister_Click"
             />
 
         <ComboBox
             x:Name="cbCountry"
             Grid.Column="4"
             Grid.Row="3"
-            SelectionChanged="cbCountry_SelectionChanged"
             />
         
 
