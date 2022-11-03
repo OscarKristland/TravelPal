@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="TravelWindow" Height="700" Width="1100">
+        Title="TravelWindow" Height="700" Width="800">
     <Grid Background="MediumSlateBlue">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -34,29 +33,22 @@
             FontWeight="Bold"
             FontSize="25"
             HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             />
         <Label
             x:Name="lblUsername"
             Grid.Column="1"
             Grid.Row="0"
+            Grid.ColumnSpan="3"
             Content=""
-            FontSize="20"
+            FontSize="25"
             FontWeight="Bold"
-            />
-        <Label
-            x:Name="lblTravels"
-            Grid.Column="1"
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            Content="Available travels"
-            FontSize="30"
-            HorizontalContentAlignment="Center"
-            FontWeight="Bold"
-            Margin="0,20"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
             />
         <Label
             x:Name="lblSelectedTravels"
-            Grid.Column="4"
+            Grid.Column="2"
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Content="Selected travels"
@@ -66,31 +58,12 @@
             Margin="0,20"
             />
         <Button
-            x:Name="btnSignout"
-            Grid.Column="0"
-            Grid.Row="6"
-            Content="Sign Out"
-            FontWeight="Bold"
-            FontSize="20"
-            Margin="10" 
-            Click="btnSignout_Click" 
-            />
-        <Button
-            x:Name="btnUser"
-            Grid.Column="1"
-            Grid.Row="6"
-            Content="Account Info"
-            FontWeight="Bold"
-            FontSize="20"
-            Margin="10" Click="btnUser_Click" 
-            />
-        <Button
             x:Name="btnAddTravel"
             Grid.Column="0"
             Grid.Row="3"
             Content="Add Travel"
             FontWeight="Bold"
-            FontSize="20"
+            FontSize="18"
             Margin="10" Click="btnAddTravel_Click" 
             />
         <Button
@@ -99,9 +72,18 @@
             Grid.Row="4"
             Content="Travel Details"
             FontWeight="Bold"
-            FontSize="20"
+            FontSize="17"
             Margin="10" 
             Click="btnDetails_Click" 
+            />
+        <Button
+            x:Name="btnUser"
+            Grid.Column="1"
+            Grid.Row="6"
+            Content="Account Info"
+            FontWeight="Bold"
+            FontSize="18"
+            Margin="10" Click="btnUser_Click" 
             />
         <Button
             x:Name="btnInfo"
@@ -109,22 +91,35 @@
             Grid.Row="6"
             Content="Info"
             FontWeight="Bold"
-            FontSize="20"
+            FontSize="18"
             Margin="10" 
             Click="btnInfo_Click"
             />
-        <ListView
-            x:Name="lvTravel"
-            Grid.Column="1"
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            Grid.RowSpan="4"
+        <Button
+            x:Name="btnSignout"
+            Grid.Column="4"
+            Grid.Row="6"
+            Content="Sign Out"
+            FontWeight="Bold"
+            FontSize="18"
+            Margin="10" 
+            Click="btnSignout_Click" 
+            />
+        <Button
+            x:Name="btnRemove"
+            Grid.Column="3"
+            Grid.Row="6"
+            Content="Remove Trip"
+            FontWeight="Bold"
+            FontSize="18"
+            Margin="10" Click="btnRemove_Click" 
+            
             />
         <ListView
             x:Name="lvAddedTravels"
-            Grid.Column="4"
+            Grid.Column="1"
             Grid.Row="2"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="4"
             Grid.RowSpan="4"
             />
         

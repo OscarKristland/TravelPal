@@ -23,24 +23,28 @@ namespace TravelPal
     public partial class AddTravelWindow : Window
     {
         private string selectedTravelType;
-        public TravelManager travelManager;
+        private TravelManager travelManager;
         private UserManager userManager;
         private User user;
 
 
-        public AddTravelWindow(UserManager userManager)
+        public AddTravelWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             this.userManager = userManager;
             this.user = userManager.SignedInUser as User;
+            this.travelManager = travelManager;
+
+
 
             cboTripOrVacation.ItemsSource = Enum.GetNames(typeof(TripOrVacation));
 
             //Gör comboboxarna osynliga, sedan beroende på vilket val användaren gör blir de synliga.
             chboAllInclusive.Visibility = Visibility.Hidden;
             cboTripType.Visibility = Visibility.Hidden;
+            lblWorkOrLeisure.Visibility = Visibility.Hidden;
 
             //Laddar comboboxen för triptype
             foreach (TripType triptype in Enum.GetValues(typeof(TripType)))
@@ -64,10 +68,9 @@ namespace TravelPal
         {
             string destination = txtDestination.Text;
             string tripOrVacation = Convert.ToString(cboTripOrVacation.SelectedItem);
-            int passengers = Convert.ToInt32(txtNumberOfPassengers.Text);
-            string countryDestinationString = cboCountryDestination.SelectedItem as string;
-            AllCountries countryDestination = (AllCountries)Enum.Parse(typeof(AllCountries), countryDestinationString);
-            string tripType = Convert.ToString(cboTripType.SelectedItem);
+            int travellers = Convert.ToInt32(txtNumberOfTravellers.Text);
+            string countryDestinationString = cboCountryDestination.SelectedItem.ToString();
+            AllCountries countryDestination = (AllCountries)Enum.Parse(typeof(AllCountries), countryDestinationString);            
 
             // error messages if all fields haven't been filled in
             if (String.IsNullOrEmpty(txtDestination.Text))
@@ -78,27 +81,47 @@ namespace TravelPal
             {
                 MessageBox.Show("Please choose if this is a trip or vacation.");
             }
-            else if (String.IsNullOrEmpty(txtNumberOfPassengers.Text))
+            else if (String.IsNullOrEmpty(txtNumberOfTravellers.Text))
             {
-                MessageBox.Show("Please specify the number of passengers");
+                MessageBox.Show("Please specify the number of travellers");
             }
             else if (cboCountryDestination.SelectedItem == null)
             {
                 MessageBox.Show("Please select a country");
             }
-            else if (cboTripType.SelectedItem == null)
-            {
-                MessageBox.Show("Please select what trip type this will be.");
-            }
             else
             {
-                //Add travel, ska skickas med????? till travelwindow, travelmanager och usermanager?????
-                this.travelManager.AddTravel(destination, tripOrVacation, passengers, countryDestination, tripType);
-                TravelWindow travelWindow = new(userManager);
-                travelWindow.Show();
+                if (cboTripOrVacation.SelectedItem.ToString() == "Vacation")
+                {
+                    //Create vacation
+                    bool isAllInclusive = false;
+                    if (chboAllInclusive.IsChecked == true)
+                    {
+                        isAllInclusive = true;
+                    }
 
-                //user travel = för att usern ska få sin resa till sitt användarkonto
-                //travelmanager ska också få listan för att admin ska kunna se resan
+                    travelManager.CreateVacation(destination, countryDestinationString, travellers, isAllInclusive);
+
+                }
+                else if (cboTripOrVacation.SelectedItem.ToString() == "Trip")
+                {
+                    
+                    if (cboTripType.SelectedItem == null)
+                    {
+                        MessageBox.Show("Please select what trip type this will be.");
+                    }
+                    
+                    //Create trip
+                    string type = cboTripType.SelectedItem.ToString();
+                    TripType triptype = (TripType)Enum.Parse(typeof(TripType), type);
+                    travelManager.CreateTrip(destination, countryDestinationString, travellers, triptype);
+                }
+                else
+                {
+                    //Error
+                    MessageBox.Show("Error please try again");
+                }
+                Close();
             }
         }
 
@@ -117,12 +140,13 @@ namespace TravelPal
 
             //Båda ska vara osynliga först, sen efter val ska den ena göras synlig.
 
-            this.selectedTravelType = cboTripOrVacation.SelectedItem as string;
+            this.selectedTravelType = cboTripOrVacation.SelectedItem.ToString();
 
             if (this.selectedTravelType == "Trip")
             {
                 cboTripType.Visibility = Visibility.Visible;
                 chboAllInclusive.Visibility = Visibility.Hidden;
+                lblWorkOrLeisure.Visibility = Visibility.Visible;
             }
             else if (this.selectedTravelType == "Vacation")
             {

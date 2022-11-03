@@ -38,62 +38,177 @@
             x:Name="lblShowUsername"
             Grid.Column="0"
             Grid.Row="1"
-            Content="Your Username:"
+            Content="Username:"
             FontSize="20"
             FontWeight="Bold"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             />
         <Label
             x:Name="lblShowPassword"
             Grid.Column="0"
             Grid.Row="2"
-            Content="Your Password:"
+            Content="Password:"
             FontSize="20"
             FontWeight="Bold"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             />
         <Label
             x:Name="lblShowCountry"
             Grid.Column="0"
             Grid.Row="3"
-            Content="Your Country:"
+            Content="Country:"
             FontSize="20"
             FontWeight="Bold"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             />
 
         <Label
             x:Name="lblUsername"
             Grid.Column="1"
             Grid.Row="1"
+            Grid.ColumnSpan="2"
             Content=""
             FontSize="20"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="10"
             />
         <Label
             x:Name="lblPassword"
             Grid.Column="1"
             Grid.Row="2"
+            Grid.ColumnSpan="2"
             Content=""
             FontSize="20"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="10"
             />
         <Label
             x:Name="lblCountry"
             Grid.Column="1"
             Grid.Row="3"
+            Grid.ColumnSpan="2"
             Content=""
             FontSize="20"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="10"
             />
-        
+
+        <Label
+            x:Name="lblnewUsername"
+            Grid.Column="3"
+            Grid.Row="1"
+            Content="New username:"
+            FontSize="15"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            />
+
+        <Label
+            x:Name="lblnewPassword"
+            Grid.Column="3"
+            Grid.Row="2"
+            Content="New password:"
+            FontSize="15"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            />
+        <Label
+            x:Name="lblnewConfirmPassword"
+            Grid.Column="3"
+            Grid.Row="3"
+            Content="Confirm password:"
+            FontSize="15"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            />
+        <Label
+            x:Name="lblnewCountry"
+            Grid.Column="3"
+            Grid.Row="4"
+            Content="New country:"
+            FontSize="15"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            />
+
+        <TextBox
+            x:Name="txtnewUsername"
+            Grid.Column="4"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="10"
+            />
+        <TextBox
+            x:Name="txtnewPsword"
+            Grid.Column="4"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="10"
+            />
+        <TextBox
+            x:Name="txtnewConfirmPassword"
+            Grid.Column="4"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="10"
+            />
+
+        <ComboBox
+            x:Name="cbCountry"
+            Grid.Column="4"
+            Grid.Row="4"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Grid.ColumnSpan="2"
+            Margin="10"
+            />
+
         <Button
             x:Name="Return"
-            Grid.Column="1"
-            Grid.Row="4"
+            Grid.Column="0"
+            Grid.Row="5"
             Content="Return" 
             Click="Return_Click"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="20"
+            FontWeight="Bold"
             />
         <Button
             x:Name="edit"
-            Grid.Column="0"
-            Grid.Row="4"
+            Grid.Column="2"
+            Grid.Row="5"
             Content="Edit" 
             Click="edit_Click"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="20"
+            FontWeight="Bold"
+            />
+        <Button
+            x:Name="Save"
+            Grid.Column="1"
+            Grid.Row="5"
+            Content="Save" Click="Save_Click" 
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="20"
+            FontWeight="Bold"
             />
 
     </Grid>

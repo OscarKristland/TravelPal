@@ -33,40 +33,22 @@
             x:Name="lblHeader"
             Grid.Column="3"
             Grid.Row="1"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             Content="Travel details"
             FontSize="30"
+            FontWeight="Bold"
             />
 
         <Label
-            x:Name="lblTripDestination"
+            x:Name="lblTripOrVacation"
             Grid.Column="1"
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            Content="Destination:"
-            Margin="10"
-            FontSize="20"
-            HorizontalContentAlignment="Center"
-            />
-        <Label
-            x:Name="lblTripOrVacation"
-            Grid.Column="1"
-            Grid.Row="4"
-            Grid.ColumnSpan="2"
             Content="Travel type:"
-            Margin="10"
-            FontSize="20"
-            HorizontalContentAlignment="Center"
-            />
-        <Label
-            x:Name="lblNumberOfTravelers"
-            Grid.Column="0"
-            Grid.Row="5"
-            Grid.ColumnSpan="3"
-            Content="Number of travelers:"
-            Margin="10"
-            FontSize="20"
+            FontSize="18"
             HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
             />
         <Label
             x:Name="lblCountryDestination"
@@ -74,54 +56,94 @@
             Grid.Row="3"
             Grid.ColumnSpan="2"
             Content="Country:"
-            Margin="10"
-            FontSize="20"
+            FontSize="18"
             HorizontalAlignment="Right"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
             />
-
-        <TextBox
-            x:Name="txtNumberOfPassengers"
-            Grid.Column="3"
-            Grid.Row="5"
-            />
-
-
-        <TextBox
-            x:Name="txtDestination"
-            Grid.Column="3"
-            Grid.Row="2"
+        <Label
+            x:Name="lblTripDestination"
+            Grid.Column="1"
+            Grid.Row="4"
             Grid.ColumnSpan="2"
+            Content="Destination:"
+            FontSize="18"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
+            />
+        <Label
+            x:Name="lblNumberOfTravelers"
+            Grid.Column="0"
+            Grid.Row="5"
+            Grid.ColumnSpan="3"
+            Content="Number of travelers:"
+            FontSize="18"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
+            />
+        <Label
+            x:Name="lblWorkOrLeisure"
+            Grid.Column="0"
+            Grid.Row="6"
+            Grid.ColumnSpan="3"
+            Content="Work or Leisure?"
+            FontSize="18"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
             />
 
+
+        <ComboBox
+            x:Name="cboTripOrVacation"
+            Grid.Column="3"
+            Grid.Row="2" 
+            Grid.ColumnSpan="2"
+            SelectionChanged="cboTripOrVacation_SelectionChanged"
+            Margin="10"
+            />
         <ComboBox
             x:Name="cboCountryDestination"
             Grid.Column="3"
             Grid.Row="3"
             Grid.ColumnSpan="2"
+            Margin="10"
             />
 
-        <ComboBox
-            x:Name="cboTripOrVacation"
+        <TextBox
+            x:Name="txtDestination"
             Grid.Column="3"
-            Grid.Row="4" SelectionChanged="cboTripOrVacation_SelectionChanged"
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            Margin="10"
             />
-
+        <TextBox
+            x:Name="txtNumberOfTravellers"
+            Grid.Column="3"
+            Grid.Row="5"
+            Margin="10"
+            Grid.ColumnSpan="2"
+            />
         <ComboBox
             x:Name="cboTripType"
-            Grid.Column="4"
-            Grid.Row="4"
-            FontSize="10"
+            Grid.Column="3"
+            Grid.Row="6"
+            Grid.ColumnSpan="2"
+            FontSize="15"
+            Margin="10"
             />
-
         <CheckBox
             x:Name="chboAllInclusive"
-            Grid.Column="4"
-            Grid.Row="3"
+            Grid.Column="3"
+            Grid.Row="6"
             Grid.ColumnSpan="2"
             Content="All inclusive?"
             FontSize="20"
-            HorizontalAlignment="Right"
-            Checked="chboAllInclusive_Checked" Margin="0,54,24,0" Grid.RowSpan="2"
+            HorizontalAlignment="Center"
+            Checked="chboAllInclusive_Checked" 
+            Margin="10"
             />
 
         <Button
@@ -129,11 +151,12 @@
             Grid.Column="4"
             Grid.Row="7"
             Content="Add travel"
-            Margin="10" Click="btnAddTravel_Click"
+            Margin="10" 
+            Click="btnAddTravel_Click"
             />
         <Button
             x:Name="btnCancel"
-            Grid.Column="6"
+            Grid.Column="3"
             Grid.Row="7"
             Content="Cancel"
             Margin="10" Click="btnCancel_Click" 

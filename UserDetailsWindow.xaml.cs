@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelPal.Countries;
+using TravelPal.Interface;
 using TravelPal.Managers;
 
 namespace TravelPal
@@ -25,16 +27,28 @@ namespace TravelPal
     /// </summary>
     public partial class UserDetailsWindow : Window
     {
+        public TravelManager travelManager;
         private UserManager userManager;
-        private User user;
+        private IUser user;
 
-        public UserDetailsWindow(UserManager userManager, User user)
+        public UserDetailsWindow(UserManager userManager, TravelManager travelManager)
         {
             this.userManager = userManager;
-            this.user = user;
-
+            this.travelManager = travelManager;
+            this.user = this.userManager.SignedInUser;
+            
             InitializeComponent();
 
+            
+            
+            lblnewUsername.Visibility = Visibility.Hidden;
+            lblnewPassword.Visibility = Visibility.Hidden;
+            lblnewConfirmPassword.Visibility = Visibility.Hidden;
+            lblnewCountry.Visibility = Visibility.Hidden;
+            txtnewUsername.Visibility = Visibility.Hidden;
+            txtnewPsword.Visibility = Visibility.Hidden;
+            txtnewConfirmPassword.Visibility = Visibility.Hidden;
+            cbCountry.Visibility = Visibility.Hidden;
 
             //Show details of the user
             lblUsername.Content = user.Username;
@@ -45,14 +59,71 @@ namespace TravelPal
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            TravelWindow travelWindow = new(userManager);
+            TravelWindow travelWindow = new(this.userManager, this.travelManager);
             travelWindow.Show();
             Close();
         }
 
+
+        //Make the textboxes editeable
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            //Make the textboxes editeable
+
+            lblnewUsername.Visibility = Visibility.Visible;
+            lblnewPassword.Visibility = Visibility.Visible;
+            lblnewConfirmPassword.Visibility = Visibility.Visible;
+            lblnewCountry.Visibility = Visibility.Visible;
+            txtnewUsername.Visibility = Visibility.Visible;
+            txtnewPsword.Visibility = Visibility.Visible;
+            txtnewConfirmPassword.Visibility = Visibility.Visible;
+            cbCountry.Visibility = Visibility.Visible;
+
+
+            //Loading the combobox with items from the enum AllCountries
+            cbCountry.ItemsSource = Enum.GetNames(typeof(AllCountries));
+            cbCountry.SelectedIndex = (int)user.Location;
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            string newUsername = txtnewUsername.Text;
+            string password = txtnewPsword.Text;
+            string locationString = cbCountry.SelectedItem as string;
+
+
+            //if (String.IsNullOrEmpty(txtnewUsername.Text) || String.IsNullOrEmpty(txtnewPsword.Text) || String.IsNullOrEmpty(txtnewConfirmPassword.Text))
+            //{
+            //    //shouldn't work to set it as empy
+            //    MessageBox.Show("Please enter a valid username//password or the confirm password and password do not align");
+
+            //}
+            if (txtnewUsername.Text.Length < 3 && txtnewUsername.Text.Length > 1)
+            {
+                //if length > 3 = can't log in either
+                MessageBox.Show("Please enter a longer username");
+            }
+            else if (txtnewPsword.Text.Length < 5 && txtnewPsword.Text.Length > 1)
+            {
+                //if length > 5 = can't log in either
+                MessageBox.Show("Please enter a longer password");
+            }
+            else if (txtnewPsword.Text != txtnewConfirmPassword.Text)
+            {
+                //The passwords are not the same
+                MessageBox.Show("Please align the passwords");
+            }
+            else
+            {
+                AllCountries location = (AllCountries)Enum.Parse(typeof(AllCountries), locationString);
+                user.Password = password;
+                user.Location = location;
+
+
+                //User details is updated
+                this.userManager.UpdateUsername(userManager.SignedInUser, newUsername);
+
+
+            }
         }
     }
 }

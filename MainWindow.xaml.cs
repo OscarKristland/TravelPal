@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelPal.Interface;
 using TravelPal.Managers;
 using TravelPal.Models;
 
@@ -23,12 +24,12 @@ namespace TravelPal
     public partial class MainWindow : Window
     {
         private UserManager userManager = new();
+        private TravelManager travelManager = new();
+        
 
         public MainWindow()
         {
             InitializeComponent();
-
-            this.userManager = new();
 
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
@@ -41,6 +42,15 @@ namespace TravelPal
             this.userManager = userManager;
         }
 
+        public MainWindow(UserManager userManager, TravelManager travelManager)
+        {
+            InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            this.userManager = userManager;
+            this.travelManager = travelManager;
+        }
+
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow registerWindow = new(userManager);
@@ -50,14 +60,14 @@ namespace TravelPal
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            List<User> users = userManager.GetAllUsers();
+            //List<IUser> users = userManager.GetAllUsers();
 
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
             bool isFoundUser = false;
 
-            foreach (User user in users)
+            foreach (User user in userManager.Users)
             {
                 if (user.Username == username && user.Password == password)
                 {
@@ -66,7 +76,7 @@ namespace TravelPal
 
                         //Show a user window
                     userManager.SignedInUser = user;
-                    TravelWindow travelWindow = new(userManager);
+                    TravelWindow travelWindow = new(userManager, travelManager);
                     travelWindow.Show();
                     Close();
                 }

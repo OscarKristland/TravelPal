@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelPal.Countries;
+using TravelPal.Interface;
 using TravelPal.Managers;
 
 namespace TravelPal
@@ -90,16 +91,18 @@ namespace TravelPal
             }
             else
             {
+                User newUser = new(username, password, location);
+
                 //User is added to a list with their individual username and password
-                this.userManager.AddUser(username, password, location);
+                this.userManager.AddUser(newUser);
 
                 MainWindow mainWindow = new(userManager);
                 mainWindow.Show();
 
-                Close();
+                
             }
-            
-            
+            Close();
+
         }
 
         
