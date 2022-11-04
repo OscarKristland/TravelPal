@@ -31,11 +31,13 @@ namespace TravelPal
     public partial class RegisterWindow : Window
     {
         private UserManager userManager;
+        private TravelManager travelManager;
 
-        public RegisterWindow(UserManager userManager)
+        public RegisterWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             this.userManager = userManager;
+            this.travelManager = travelManager;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             //Loading the combobox with items from the enum AllCountries
@@ -51,7 +53,7 @@ namespace TravelPal
         {
             //Closer this window and go back to the main window
             
-            MainWindow mainWindow = new(userManager);
+            MainWindow mainWindow = new(userManager, travelManager);
             mainWindow.Show();
             Close();
         }
@@ -61,8 +63,7 @@ namespace TravelPal
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
-            string locationString = cbCountry.SelectedItem as string;
-            AllCountries location = (AllCountries)Enum.Parse(typeof(AllCountries), locationString); // Parsa en sträng i en enum till enumvarianten
+             // Parsa en sträng i en enum till enumvarianten
 
             if(String.IsNullOrEmpty(txtUsername.Text) || String.IsNullOrEmpty(txtPassword.Text) || String.IsNullOrEmpty(txtConfirmPassword.Text))
             {
@@ -91,12 +92,14 @@ namespace TravelPal
             }
             else
             {
+                string locationString = cbCountry.SelectedItem as string;
+                AllCountries location = (AllCountries)Enum.Parse(typeof(AllCountries), locationString);
                 User newUser = new(username, password, location);
 
                 //User is added to a list with their individual username and password
                 this.userManager.AddUser(newUser);
 
-                MainWindow mainWindow = new(userManager);
+                MainWindow mainWindow = new(userManager, travelManager);
                 mainWindow.Show();
 
                 

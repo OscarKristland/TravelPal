@@ -26,22 +26,25 @@ namespace TravelPal.Managers
 
 
         //Method to create a trip
-        public void CreateTrip(string destination, string country, int travellers, TripType type)
+        public Travel CreateTrip(string destination, string country, int travellers, TripType type)
         {
             //Innehåll med trip specific info som leisure eller work
 
             Trip trip = new(destination, country, travellers, type);
             AddTravel(trip);
+
+            return trip;
         }
 
         //Method to create a vacation
-        public void CreateVacation(string destination, string country, int travellers, bool allInclusive)
+        public Travel CreateVacation(string destination, string country, int travellers, bool allInclusive)
         {
             //Innehåll med vacation specific info, som allinclusive eller ej
 
             Vacation vacation = new(destination, country, travellers, allInclusive);
             AddTravel(vacation);
 
+            return vacation;
         }
 
         //Method to remove a travel

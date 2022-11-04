@@ -26,19 +26,23 @@ namespace TravelPal
         private TravelManager travelManager;
         private UserManager userManager;
         private User user;
-
+        private Travel travels;
 
         public AddTravelWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
+
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             this.userManager = userManager;
             this.user = userManager.SignedInUser as User;
             this.travelManager = travelManager;
 
+            UpdateUi();
+        }
 
-
+        private void UpdateUi()
+        {
             cboTripOrVacation.ItemsSource = Enum.GetNames(typeof(TripOrVacation));
 
             //Gör comboboxarna osynliga, sedan beroende på vilket val användaren gör blir de synliga.
@@ -56,7 +60,11 @@ namespace TravelPal
             {
                 cboCountryDestination.Items.Add(countries.ToString());
             }
+
+
+
         }
+
 
         private void chboAllInclusive_Checked(object sender, RoutedEventArgs e)
         {
@@ -100,8 +108,12 @@ namespace TravelPal
                         isAllInclusive = true;
                     }
 
-                    travelManager.CreateVacation(destination, countryDestinationString, travellers, isAllInclusive);
 
+                    
+                    Travel newTravel = travelManager.CreateVacation(destination, countryDestinationString, travellers, isAllInclusive);
+
+                    User user = userManager.SignedInUser as User;
+                    user.travels.Add(newTravel);
                 }
                 else if (cboTripOrVacation.SelectedItem.ToString() == "Trip")
                 {
@@ -114,7 +126,11 @@ namespace TravelPal
                     //Create trip
                     string type = cboTripType.SelectedItem.ToString();
                     TripType triptype = (TripType)Enum.Parse(typeof(TripType), type);
-                    travelManager.CreateTrip(destination, countryDestinationString, travellers, triptype);
+                    Travel newTrip = travelManager.CreateTrip(destination, countryDestinationString, travellers, triptype);
+
+
+                    User user = userManager.SignedInUser as User;
+                    user.travels.Add(newTrip);
                 }
                 else
                 {

@@ -87,7 +87,7 @@ namespace TravelPal
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             string newUsername = txtnewUsername.Text;
-            string password = txtnewPsword.Text;
+            string newPassword = txtnewPsword.Text;
             string locationString = cbCountry.SelectedItem as string;
 
 
@@ -115,7 +115,8 @@ namespace TravelPal
             else
             {
                 AllCountries location = (AllCountries)Enum.Parse(typeof(AllCountries), locationString);
-                user.Password = password;
+                user.Username = newUsername;
+                user.Password = newPassword;
                 user.Location = location;
 
 

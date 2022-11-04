@@ -23,23 +23,28 @@ namespace TravelPal
     /// </summary>
     public partial class MainWindow : Window
     {
-        private UserManager userManager = new();
-        private TravelManager travelManager = new();
+        private UserManager userManager;
+        private TravelManager travelManager;
         
 
         public MainWindow()
         {
             InitializeComponent();
 
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        }
+            this.userManager = new();
+            this.travelManager = new();
 
-        public MainWindow(UserManager userManager)
-        {
-            InitializeComponent();
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            foreach(IUser user in userManager.Users)
+            {
+                if(user is User)
+                {
+                    User u = user as User;
 
-            this.userManager = userManager;
+                    travelManager.Travels.AddRange(u.travels);
+                }
+            } 
+
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         public MainWindow(UserManager userManager, TravelManager travelManager)
@@ -53,7 +58,7 @@ namespace TravelPal
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegisterWindow registerWindow = new(userManager);
+            RegisterWindow registerWindow = new(userManager, travelManager);
             registerWindow.Show();
             Close();
         }
@@ -67,7 +72,7 @@ namespace TravelPal
 
             bool isFoundUser = false;
 
-            foreach (User user in userManager.Users)
+            foreach (IUser user in userManager.Users)
             {
                 if (user.Username == username && user.Password == password)
                 {

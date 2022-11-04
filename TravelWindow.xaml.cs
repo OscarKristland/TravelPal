@@ -28,14 +28,16 @@ namespace TravelPal
         public TravelManager travelManager;
         private UserManager userManager;
         private User user;
-        
+        private Admin admin;
+        public List<Travel> Travels { get; }
+
 
 
         //public TravelWindow(UserManager userManager)
         //{
-            
+
         //    this.userManager = userManager;
-            
+
 
         //    if (userManager.SignedInUser is User)
         //    {
@@ -46,7 +48,7 @@ namespace TravelPal
         //    WindowStartupLocation = WindowStartupLocation.CenterScreen;
         //    lblUsername.Content = user.Username;
 
-            
+
         //}
 
         public TravelWindow(UserManager userManager, TravelManager travelManager)
@@ -56,6 +58,8 @@ namespace TravelPal
             this.userManager = userManager;
             btnRemove.Visibility = Visibility.Hidden;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            
+            
 
             if (userManager.SignedInUser is User)
             {
@@ -66,27 +70,45 @@ namespace TravelPal
                 
                 btnRemove.Visibility = Visibility.Visible;
             }
-            else
 
-            
             DisplayTravels();
-            lblUsername.Content = user.Username;
+            lblUsername.Content = userManager.SignedInUser.Username;
         }
 
         private void DisplayTravels()
         {
             lvAddedTravels.Items.Clear();
 
-            foreach (Travel travel in this.travelManager.Travels)
+
+            if(userManager.SignedInUser is User)
             {
-                ListViewItem item = new();
+                // Visa resor från användarens lista
+                foreach (Travel travel in this.user.travels)
+                {
+                    ListViewItem item = new();
 
-                item.Content = travel.GetInfo();
-                item.Tag = travel;
+                    item.Content = travel.GetInfo();
+                    item.Tag = travel;
 
-                lvAddedTravels.Items.Add(item);
+                    lvAddedTravels.Items.Add(item);
 
+                }
             }
+            else if(userManager.SignedInUser is Admin)
+            {
+                // Visa resor från TravelManager
+                foreach (Travel travel in this.travelManager.Travels)
+                {
+                    ListViewItem item = new();
+
+                    item.Content = travel.GetInfo();
+                    item.Tag = travel;
+
+                    lvAddedTravels.Items.Add(item);
+
+                }
+            }
+
 
 
         }
@@ -115,13 +137,28 @@ namespace TravelPal
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
+            ListViewItem selectedItem = lvAddedTravels.SelectedItem as ListViewItem;
+
+            if (selectedItem == null)
+            {
+                AddTravelWindow addTravelWindow = new(userManager, travelManager);
+                addTravelWindow.Show();
+            }
+            else
+            {
+                Travel selectedTravel = selectedItem.Tag as Travel;
+
+                TravelDetails travelDetails = new(userManager, travelManager, selectedTravel);
+                travelDetails.Show();
+            }
+
             // window showing all sorts of stuff
             //Should be a window that shows up with already locked in information.
             //the info should have been filled in from the "addtravelwindow"
             //Ska user och usermanager skickas med? Eller båda?
             //The window that this clickevent should be linked needs to have an "edit"-button
-            AddTravelWindow addTravelWindow = new(userManager, travelManager);
-            addTravelWindow.Show();
+            //AddTravelWindow addTravelWindow = new(userManager, travelManager);
+            //addTravelWindow.Show();
         }
 
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)

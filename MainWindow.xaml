@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        >
+        Title="MainWindow" Height="450" Width="800">
+   
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\ole_b\source\repos\TravelPal\TravelPal\Resources\BackgroundTravelPal.png"/>
+    </Window.Background>
     
-    
-    <Grid Background="MediumSlateBlue">
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -66,6 +68,7 @@
             Margin="10"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
+            
             />
         <TextBox
             x:Name="txtPassword"
@@ -96,6 +99,14 @@
             FontSize="20"
             Margin="10" 
             Click="btnRegister_Click"
+            />
+
+        <Label
+            Grid.Column="5"
+            Grid.Row="5"
+            Content="HEjhej"
+            FontSize="20"
+            
             />
 
     </Grid>

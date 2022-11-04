@@ -29,18 +29,20 @@ namespace TravelPal.Managers
         public UserManager()
         {
             User albin = new("Gandalf", "password", AllCountries.Sweden);
-            Users.Add(albin);
+            Admin admin = new("Admin", "password", AllCountries.Switzerland);
+
+            Trip trip1 = new("Paris", Convert.ToString(AllCountries.France), 3, TripType.Work);
+            albin.travels.Add(trip1);
+            Vacation vacation1 = new("Stockholm", Convert.ToString(AllCountries.Sweden), 8, true);
+            albin.travels.Add(vacation1);
+            //TravelManager.CreateTrip(paris);
+
+            //Trip trip = new(destination, countryDestinationString, travellers, TripType.Work);
 
 
-            string destination = "Berlin";
             
-            int travellers = 2;
-            string countryDestinationString = "Germany";
-
-            //TravelManager.CreateTrip(destination, countryDestinationString, travellers, Convert.ToString(TripOrVacation.Trip));
-
-            User admin = new("Admin", "password", AllCountries.Switzerland);
             Users.Add(admin);
+            Users.Add(albin);
         }
 
         public List<IUser> GetAllUsers()
