@@ -19,11 +19,9 @@ namespace TravelPal.Models
             Travellers = travellers;
         }
 
+        //Shows info on the travel
         public virtual string GetInfo()
-        {
-            //Här info plockas, från listan
-
-            
+        {   
             return $"Destination: {Destination} Country: {Countries} Travellers: {Travellers}";
         }
     }

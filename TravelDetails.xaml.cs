@@ -31,21 +31,27 @@ namespace TravelPal
         {
             InitializeComponent();
 
+            lblWorkorLeisure.Visibility = Visibility.Hidden;
+            lblAllInclusive.Visibility = Visibility.Hidden;
             lblTripDestination.Content = travel.Destination;
             lblCountryDestination.Content = travel.Countries;
             lblNumberOfTravelers.Content = travel.Travellers;
             lblTripOrVacation.Content = travel.GetType().Name;
-
-            if(travel is Trip)
+            
+            //Shows information on the selected travel, changes if it's a trip or vacation
+            if (travel is Trip)
             {
                 Trip trip = travel as Trip;
                 lblWorkOrLeisure.Content = trip.Type;
+                lblWorkorLeisure.Visibility = Visibility.Visible;
             }
             else if (travel is Vacation)
             {
                 Vacation vacation = travel as Vacation;
-                
-                if(vacation.AllInclusive)
+                lblAllInclusive.Visibility = Visibility.Visible;
+
+
+                if (vacation.AllInclusive)
                 {
                     lblWorkOrLeisure.Content = "All inclusive";
                 }
@@ -55,7 +61,7 @@ namespace TravelPal
                 }
             }
         }
-
+        //returns the user to the travelwindow
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();

@@ -41,6 +41,7 @@ namespace TravelPal
             UpdateUi();
         }
 
+        //Updates the UI, makes unique comboboxes hidden
         private void UpdateUi()
         {
             cboTripOrVacation.ItemsSource = Enum.GetNames(typeof(TripOrVacation));
@@ -65,13 +66,13 @@ namespace TravelPal
 
         }
 
-
+        //checkbox if its all inclusive or not
         private void chboAllInclusive_Checked(object sender, RoutedEventArgs e)
         {
-            //All inclusive checked
             
         }
 
+        //Button where a travel is added to the users own list of travels
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
             string destination = txtDestination.Text;

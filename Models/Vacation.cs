@@ -18,13 +18,11 @@ namespace TravelPal.Models
             AllInclusive = allInclusive;
         }
 
-        //+ allInclusive: bool
-        //+ Vacation(allInclusive)
-        //+ GetInfo() : string
+        //Shows info of the vacation
         public override string GetInfo()
         {
             //Denna metod ska visa infon som gör att en resa är en vacation
-            return $"Destination: {Destination} Country: {Countries} Travellers: {Travellers} AllInclusive: {AllInclusive}";
+            return $"Destination: {Destination}        Country: {Countries}        Travellers: {Travellers}        All inclusive: {AllInclusive}";
         }
     }
 }

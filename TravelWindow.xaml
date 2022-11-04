@@ -82,7 +82,7 @@
             Grid.Row="6"
             Content="Account Info"
             FontWeight="Bold"
-            FontSize="18"
+            FontSize="16"
             Margin="10" Click="btnUser_Click" 
             />
         <Button

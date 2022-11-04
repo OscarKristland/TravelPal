@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelPal.Interface;
 using TravelPal.Managers;
 using TravelPal.Models;
 
@@ -20,7 +21,9 @@ namespace TravelPal
     /// Interaction logic for TravelWindow.xaml
     /// 
     /// TODO
-    /// Info knappen ska ha mer skrivet till sig om hur man använder systemet med att lägga till travel och hela det köret
+    /// Info knappen ska ha mer skrivet till sig Typ Visit travelpalbyboat.com to get more info
+    /// Remove knappen
+    /// 
     /// 
     /// </summary>
     public partial class TravelWindow : Window
@@ -33,30 +36,13 @@ namespace TravelPal
 
 
 
-        //public TravelWindow(UserManager userManager)
-        //{
-
-        //    this.userManager = userManager;
-
-
-        //    if (userManager.SignedInUser is User)
-        //    {
-        //        this.user = userManager.SignedInUser as User;
-        //    }
-
-        //    InitializeComponent();
-        //    WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        //    lblUsername.Content = user.Username;
-
-
-        //}
 
         public TravelWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             this.travelManager = travelManager;
             this.userManager = userManager;
-            btnRemove.Visibility = Visibility.Hidden;
+            
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             
             
@@ -64,17 +50,20 @@ namespace TravelPal
             if (userManager.SignedInUser is User)
             {
                 this.user = userManager.SignedInUser as User;
+                
             }
             else if(userManager.SignedInUser is Admin)
             {
                 
-                btnRemove.Visibility = Visibility.Visible;
+                
             }
 
             DisplayTravels();
             lblUsername.Content = userManager.SignedInUser.Username;
         }
 
+
+        //displays travels depending on if it's a user or an admin
         private void DisplayTravels()
         {
             lvAddedTravels.Items.Clear();
@@ -112,7 +101,7 @@ namespace TravelPal
 
 
         }
-
+        //the user is signed out
         private void btnSignout_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new(this.userManager, this.travelManager);
@@ -121,10 +110,11 @@ namespace TravelPal
             Close();
         }
 
+        //The info button where it only says to visit the travelpal website
         private void btnInfo_Click(object sender, RoutedEventArgs e)
         {
-            //Show some great info
-            MessageBox.Show("Error");
+            
+            MessageBox.Show("Please visit www.TravelPalByBoat.com for more info on how to use this app");
         }
 
         //User clicks on Account info and gets a new window that shows details of their account.
@@ -135,6 +125,7 @@ namespace TravelPal
             Close();
         }
 
+        //Opens a new window that shows information on the selected travel from the listview
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
             ListViewItem selectedItem = lvAddedTravels.SelectedItem as ListViewItem;
@@ -151,29 +142,75 @@ namespace TravelPal
                 TravelDetails travelDetails = new(userManager, travelManager, selectedTravel);
                 travelDetails.Show();
             }
-
-            // window showing all sorts of stuff
-            //Should be a window that shows up with already locked in information.
-            //the info should have been filled in from the "addtravelwindow"
-            //Ska user och usermanager skickas med? Eller båda?
-            //The window that this clickevent should be linked needs to have an "edit"-button
-            //AddTravelWindow addTravelWindow = new(userManager, travelManager);
-            //addTravelWindow.Show();
         }
 
+        //If clicked by the user, they are taken to the addtravelwindow where they can add travels for themselves.
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
-            //If clicked the item should have
-            AddTravelWindow addTravelWindow = new(userManager, travelManager);
-            addTravelWindow.ShowDialog();
 
-            DisplayTravels();
+            if (userManager.SignedInUser is User)
+            {
+                
+                AddTravelWindow addTravelWindow = new(userManager, travelManager);
+                addTravelWindow.ShowDialog();
+
+                DisplayTravels();
+            }
+            else if (userManager.SignedInUser is Admin)
+            {
+
+                MessageBox.Show("You're the admin why would u wanna add a travel? You don't even have your own list");
+            }
+
+            
 
         }
 
+        //removes the selected travel from the listview as well as from the users travel list
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            ListViewItem selectedItem = lvAddedTravels.SelectedItem as ListViewItem;
+            
 
+            if (selectedItem == null)
+            {
+                MessageBox.Show("Please select a trip to remove");
+            }
+            else if(userManager.SignedInUser is User)
+            {
+                Travel removeTravel = selectedItem.Tag as Travel;
+                ((User)userManager.SignedInUser).travels.Remove(removeTravel);
+                travelManager.RemoveTravel(removeTravel);
+            }
+            else if (userManager.SignedInUser is Admin)
+            {
+                Admin admin = (Admin)userManager.SignedInUser;
+                Travel removeTravel = selectedItem.Tag as Travel;
+                foreach (IUser user in userManager.Users)
+                {
+                    if (user is User)
+                    {
+                        bool found = false;
+                        foreach (Travel travel in ((User)user).travels)
+                        {
+                            if(travel == removeTravel)
+                            {
+                                found = true;
+                            }
+
+                        }
+                        if (found)
+                        {
+                            ((User)user).travels.Remove(removeTravel);
+                            break;
+                        }
+
+                    }
+                }
+                travelManager.RemoveTravel(removeTravel);
+                
+            }
+            DisplayTravels();
         }
     }
 }

@@ -39,8 +39,6 @@ namespace TravelPal
             
             InitializeComponent();
 
-            
-            
             lblnewUsername.Visibility = Visibility.Hidden;
             lblnewPassword.Visibility = Visibility.Hidden;
             lblnewConfirmPassword.Visibility = Visibility.Hidden;
@@ -49,14 +47,14 @@ namespace TravelPal
             txtnewPsword.Visibility = Visibility.Hidden;
             txtnewConfirmPassword.Visibility = Visibility.Hidden;
             cbCountry.Visibility = Visibility.Hidden;
+            Save.Visibility = Visibility.Hidden;
 
             //Show details of the user
             lblUsername.Content = user.Username;
             lblPassword.Content = user.Password;
             lblCountry.Content = user.Location;
-            
         }
-
+        //Returns the user to the travelwindow
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             TravelWindow travelWindow = new(this.userManager, this.travelManager);
@@ -77,53 +75,57 @@ namespace TravelPal
             txtnewPsword.Visibility = Visibility.Visible;
             txtnewConfirmPassword.Visibility = Visibility.Visible;
             cbCountry.Visibility = Visibility.Visible;
-
+            Save.Visibility = Visibility.Visible;
 
             //Loading the combobox with items from the enum AllCountries
             cbCountry.ItemsSource = Enum.GetNames(typeof(AllCountries));
             cbCountry.SelectedIndex = (int)user.Location;
         }
 
+        //Saves the edits that the user wants to do to their own account
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+
+            string locationString = cbCountry.SelectedItem as string;
+            AllCountries location = (AllCountries)Enum.Parse(typeof(AllCountries), locationString);
+
             string newUsername = txtnewUsername.Text;
             string newPassword = txtnewPsword.Text;
-            string locationString = cbCountry.SelectedItem as string;
+            
 
-
-            //if (String.IsNullOrEmpty(txtnewUsername.Text) || String.IsNullOrEmpty(txtnewPsword.Text) || String.IsNullOrEmpty(txtnewConfirmPassword.Text))
-            //{
-            //    //shouldn't work to set it as empy
-            //    MessageBox.Show("Please enter a valid username//password or the confirm password and password do not align");
-
-            //}
-            if (txtnewUsername.Text.Length < 3 && txtnewUsername.Text.Length > 1)
+            if (txtnewPsword.Text != userManager.SignedInUser.Password && txtnewUsername.Text != userManager.SignedInUser.Username)
             {
-                //if length > 3 = can't log in either
-                MessageBox.Show("Please enter a longer username");
-            }
-            else if (txtnewPsword.Text.Length < 5 && txtnewPsword.Text.Length > 1)
-            {
-                //if length > 5 = can't log in either
-                MessageBox.Show("Please enter a longer password");
+                userManager.UpdatePassword(userManager.SignedInUser, newPassword);
+                userManager.UpdateUsername(userManager.SignedInUser, newUsername);
+                userManager.UpdateCountry(userManager.SignedInUser, location);
+
             }
             else if (txtnewPsword.Text != txtnewConfirmPassword.Text)
             {
                 //The passwords are not the same
                 MessageBox.Show("Please align the passwords");
             }
+            else if (txtnewPsword.Text.Length < 5 && txtnewPsword.Text.Length > 1)
+            {
+                //if length > 5 = can't create a new one
+                MessageBox.Show("Please enter a longer password");
+            }
+            else if (String.IsNullOrEmpty(txtnewUsername.Text) || String.IsNullOrEmpty(txtnewPsword.Text) || String.IsNullOrEmpty(txtnewConfirmPassword.Text))
+            {
+                //shouldn't work to set it as empy
+                MessageBox.Show("You have not chosen to edit anything, please do before continuing");
+
+            }
+            else if (txtnewUsername.Text.Length < 1 && txtnewUsername.Text.Length > 1)
+            {
+                //if length > 3 = can't create a new username
+                MessageBox.Show("Please enter a longer username");
+            }
             else
             {
-                AllCountries location = (AllCountries)Enum.Parse(typeof(AllCountries), locationString);
-                user.Username = newUsername;
-                user.Password = newPassword;
-                user.Location = location;
-
-
-                //User details is updated
-                this.userManager.UpdateUsername(userManager.SignedInUser, newUsername);
-
-
+                TravelWindow travelWindow = new(userManager, travelManager);
+                travelWindow.Show();
+                Close();
             }
         }
     }

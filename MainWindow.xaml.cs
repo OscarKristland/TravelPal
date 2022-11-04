@@ -55,7 +55,7 @@ namespace TravelPal
             this.userManager = userManager;
             this.travelManager = travelManager;
         }
-
+        //Click event where the user is sent to the registerwindow
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow registerWindow = new(userManager, travelManager);
@@ -63,6 +63,8 @@ namespace TravelPal
             Close();
         }
 
+        //checks if both the username and password are correct but also if the username exists in the list of users
+        //If successfull the login succeeds
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             //List<IUser> users = userManager.GetAllUsers();

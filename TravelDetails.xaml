@@ -31,85 +31,147 @@
 
         <Label
             x:Name="lblHeader"
-            Grid.Column="3"
+            Grid.Column="2"
             Grid.Row="1"
-            Grid.ColumnSpan="3"
+            Grid.ColumnSpan="4"
             Content="Travel details"
             FontSize="30"
             FontWeight="Bold"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
             />
 
         <Label
             x:Name="lblTripOrVacation"
-            Grid.Column="1"
+            Grid.Column="3"
             Grid.Row="2"
             Grid.ColumnSpan="2"
             Content="Travel type:"
             FontSize="18"
-            HorizontalContentAlignment="Right"
+            HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             FontWeight="Bold"
             />
         <Label
             x:Name="lblCountryDestination"
-            Grid.Column="1"
+            Grid.Column="3"
             Grid.Row="3"
             Grid.ColumnSpan="2"
             Content="Country:"
             FontSize="18"
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Center"
             VerticalContentAlignment="Center"
             FontWeight="Bold"
             />
         <Label
             x:Name="lblTripDestination"
-            Grid.Column="1"
+            Grid.Column="3"
             Grid.Row="4"
             Grid.ColumnSpan="2"
             Content="Destination:"
             FontSize="18"
-            HorizontalContentAlignment="Right"
+            HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             FontWeight="Bold"
             />
         <Label
             x:Name="lblNumberOfTravelers"
-            Grid.Column="0"
+            Grid.Column="3"
             Grid.Row="5"
-            Grid.ColumnSpan="3"
+            Grid.ColumnSpan="2"
             Content="Number of travelers:"
+            FontSize="18"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
+            />
+        <Label
+            x:Name="lblWorkOrLeisure"
+            Grid.Column="3"
+            Grid.Row="6"
+            Grid.ColumnSpan="2"
+            Content="Work or Leisure?"
+            FontSize="18"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
+            />
+
+        <Label
+            x:Name="lblTraveltype"
+            Grid.Column="1"
+            Grid.Row="2"
+            Margin="10"
+            Content="Travel type:"
+            Grid.ColumnSpan="2"
             FontSize="18"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
             FontWeight="Bold"
             />
         <Label
-            x:Name="lblWorkOrLeisure"
-            Grid.Column="0"
-            Grid.Row="6"
-            Grid.ColumnSpan="3"
-            Content="Work or Leisure?"
+            x:Name="lblCountry"
+            Grid.Column="1"
+            Grid.Row="3"
+            Margin="10"
+            Content="Country:"
+            Grid.ColumnSpan="2"
             FontSize="18"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
             FontWeight="Bold"
             />
-
-        <TextBox
-            x:Name="txtDestination"
-            Grid.Column="3"
+        <Label
+            x:Name="lblCity"
+            Grid.Column="1"
             Grid.Row="4"
-            Grid.ColumnSpan="2"
             Margin="10"
+            Content="Destination:"
+            Grid.ColumnSpan="2"
+            FontSize="18"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
             />
-        <TextBox
-            x:Name="txtNumberOfTravellers"
-            Grid.Column="3"
+        <Label
+            x:Name="lblDesti"
+            Grid.Column="0"
             Grid.Row="5"
             Margin="10"
-            Grid.ColumnSpan="2"
+            Content="Number of travelers:"
+            Grid.ColumnSpan="3"
+            FontSize="18"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
             />
-
+        <Label
+            x:Name="lblWorkorLeisure"
+            Grid.Column="0"
+            Grid.Row="6"
+            Margin="10"
+            Content="Work or Leisure:"
+            Grid.ColumnSpan="3"
+            FontSize="18"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
+            />
+        <Label
+            x:Name="lblAllInclusive"
+            Grid.Column="0"
+            Grid.Row="6"
+            Margin="10"
+            Content="AllInclusive:"
+            Grid.ColumnSpan="3"
+            FontSize="18"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"
+            />
+        
+        
+        
         <Button
             x:Name="btnCancel"
             Grid.Column="3"

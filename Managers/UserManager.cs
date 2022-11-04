@@ -35,30 +35,18 @@ namespace TravelPal.Managers
             albin.travels.Add(trip1);
             Vacation vacation1 = new("Stockholm", Convert.ToString(AllCountries.Sweden), 8, true);
             albin.travels.Add(vacation1);
-            //TravelManager.CreateTrip(paris);
-
-            //Trip trip = new(destination, countryDestinationString, travellers, TripType.Work);
-
-
             
             Users.Add(admin);
             Users.Add(albin);
         }
 
+        //method that returns all users
         public List<IUser> GetAllUsers()
         {
             return Users;
         }
 
-        //public bool AddUser(string username, string password, AllCountries location)
-        //{
-        //      ValidateUsername(username);
-        //      User user = new(username, password, location);
-        //      Users.Add(user);
-        //
-        //
-        //}
-
+        //Method that adds a user
         public bool AddUser(IUser newUser)
         {
             if (ValidateUsername(newUser.Username) == true)
@@ -69,31 +57,76 @@ namespace TravelPal.Managers
             }
             else
             {
-                //ValidateUsername(newUsername.Username) == false
                 //False dont create new user
                 return false;
             }
 
         }
 
+        //Method to remove a user
         public void RemoveUser(IUser user)
         {
             Users.Remove(user);
         }
-
-        
-
-        public bool UpdateUsername(IUser user, string newUsername)
+        //Updates the username when edited
+        public bool UpdateUsername(IUser userUpdate, string newUsername)
         {
-           if (ValidateUsername(newUsername) == true)
-           {
-                return true;
-                //its updated if true
+            if (!ValidateNewUsername(newUsername))
+            {
+                return false;
+            }
 
-           }
-           return false;
+            userUpdate.Username = newUsername;
+
+            return true;
+        }
+        //Updates the password when edited
+        public bool UpdatePassword(IUser userUpdate, string newPassword)
+        {
+            if (!ValidateNewPassword(newPassword))
+            {
+                return false;
+            }
+
+            userUpdate.Password = newPassword;
+
+            return true;
+        }
+        //Updates the country when edited
+        public void UpdateCountry(IUser userUpdate, AllCountries location)
+        {
+            userUpdate.Location = location;
         }
 
+        //Check if new username already exists
+        public bool ValidateNewUsername(string newUsername)
+        {
+            foreach (IUser user in Users)
+            {
+                if (user.Username == newUsername)
+                {
+                    MessageBox.Show("Username is taken");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        //Check if it's a new password when we're updating it
+        public bool ValidateNewPassword(string newPassword)
+        {
+            foreach (IUser user in Users)
+            {
+                if (user.Password == newPassword)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        //checking if the username is taken
         private bool ValidateUsername(string username)
         {
             foreach(IUser user in Users)
@@ -107,10 +140,10 @@ namespace TravelPal.Managers
             return true;
         }
 
+        //signs the user in
         public bool SignInUser(string username, string password)
         {
 
-            //return smth??????
             foreach (User user in Users)
             {
                 if (user.Username == username && user.Password == password)

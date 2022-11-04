@@ -18,14 +18,11 @@ namespace TravelPal.Models
             Type = type;
         }
 
-        //+ type: TripType
-        // + Trip(type)
-        //+ GetInfo() : string
         public override string GetInfo()
         {
             //Denna metod ska visa infon som gör att en resa är en trip
             //Returnera all info
-            return $"Destination: {Destination} Country: {Countries} Travellers: {Travellers} Type: {Type} ";
+            return $"Destination: {Destination}        Country: {Countries}        Travellers: {Travellers}        Type: {Type} ";
         }
     }
 }

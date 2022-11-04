@@ -14,6 +14,7 @@ namespace TravelPal.Managers
         public List<Travel> Travels { get; set; } = new();
 
 
+        //adds travel
         public void AddTravel(Travel travel)
         {
             //Method to create a travel destination

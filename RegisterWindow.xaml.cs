@@ -51,20 +51,18 @@ namespace TravelPal
         //If you don't want to register you can click cancel, should be sent back to main window
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            //Closer this window and go back to the main window
             
             MainWindow mainWindow = new(userManager, travelManager);
             mainWindow.Show();
             Close();
         }
 
-        //This should take you to back to the mainwindow again and make you either log in or register again
+        //Takes the user back to the mainwindow again and you can either log in or register again
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
-             // Parsa en sträng i en enum till enumvarianten
-
+            
             if(String.IsNullOrEmpty(txtUsername.Text) || String.IsNullOrEmpty(txtPassword.Text) || String.IsNullOrEmpty(txtConfirmPassword.Text))
             {
                 //shouldn't work to set it as empy
