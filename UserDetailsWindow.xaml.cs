@@ -91,42 +91,43 @@ namespace TravelPal
 
             string newUsername = txtnewUsername.Text;
             string newPassword = txtnewPsword.Text;
-            
 
-            if (txtnewPsword.Text != userManager.SignedInUser.Password && txtnewUsername.Text != userManager.SignedInUser.Username)
-            {
-                userManager.UpdatePassword(userManager.SignedInUser, newPassword);
-                userManager.UpdateUsername(userManager.SignedInUser, newUsername);
-                userManager.UpdateCountry(userManager.SignedInUser, location);
 
-            }
-            else if (txtnewPsword.Text != txtnewConfirmPassword.Text)
-            {
-                //The passwords are not the same
-                MessageBox.Show("Please align the passwords");
-            }
-            else if (txtnewPsword.Text.Length < 5 && txtnewPsword.Text.Length > 1)
-            {
-                //if length > 5 = can't create a new one
-                MessageBox.Show("Please enter a longer password");
-            }
-            else if (String.IsNullOrEmpty(txtnewUsername.Text) || String.IsNullOrEmpty(txtnewPsword.Text) || String.IsNullOrEmpty(txtnewConfirmPassword.Text))
+            if (String.IsNullOrEmpty(txtnewUsername.Text) || String.IsNullOrEmpty(txtnewPsword.Text) || String.IsNullOrEmpty(txtnewConfirmPassword.Text))
             {
                 //shouldn't work to set it as empy
                 MessageBox.Show("You have not chosen to edit anything, please do before continuing");
-
             }
             else if (txtnewUsername.Text.Length < 1 && txtnewUsername.Text.Length > 1)
             {
                 //if length > 3 = can't create a new username
                 MessageBox.Show("Please enter a longer username");
             }
-            else
+            else if (txtnewPsword.Text.Length < 5 && txtnewPsword.Text.Length > 1)
             {
+                //if length > 5 = can't create a new one
+                MessageBox.Show("Please enter a longer password");
+            }
+            else if (txtnewPsword.Text != txtnewConfirmPassword.Text)
+            {
+                //The passwords are not the same
+                MessageBox.Show("Please align the passwords");
+            }
+            else if (txtnewPsword.Text != userManager.SignedInUser.Password && txtnewUsername.Text != userManager.SignedInUser.Username)
+            {
+                userManager.UpdatePassword(userManager.SignedInUser, newPassword);
+                userManager.UpdateUsername(userManager.SignedInUser, newUsername);
+                userManager.UpdateCountry(userManager.SignedInUser, location);
+
                 TravelWindow travelWindow = new(userManager, travelManager);
                 travelWindow.Show();
                 Close();
             }
+            else
+            {
+                MessageBox.Show("Error");
+            }
+
         }
     }
 }

@@ -45,8 +45,6 @@ namespace TravelPal
             
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             
-            
-
             if (userManager.SignedInUser is User)
             {
                 this.user = userManager.SignedInUser as User;

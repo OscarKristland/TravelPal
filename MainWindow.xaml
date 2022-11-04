@@ -100,14 +100,5 @@
             Margin="10" 
             Click="btnRegister_Click"
             />
-
-        <Label
-            Grid.Column="5"
-            Grid.Row="5"
-            Content="HEjhej"
-            FontSize="20"
-            
-            />
-
     </Grid>
 </Window>

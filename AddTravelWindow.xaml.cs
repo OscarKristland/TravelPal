@@ -75,11 +75,7 @@ namespace TravelPal
         //Button where a travel is added to the users own list of travels
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
-            string destination = txtDestination.Text;
-            string tripOrVacation = Convert.ToString(cboTripOrVacation.SelectedItem);
-            int travellers = Convert.ToInt32(txtNumberOfTravellers.Text);
-            string countryDestinationString = cboCountryDestination.SelectedItem.ToString();
-            AllCountries countryDestination = (AllCountries)Enum.Parse(typeof(AllCountries), countryDestinationString);            
+                        
 
             // error messages if all fields haven't been filled in
             if (String.IsNullOrEmpty(txtDestination.Text))
@@ -100,6 +96,12 @@ namespace TravelPal
             }
             else
             {
+                string destination = txtDestination.Text;
+                string tripOrVacation = Convert.ToString(cboTripOrVacation.SelectedItem);
+                int travellers = Convert.ToInt32(txtNumberOfTravellers.Text);
+                string countryDestinationString = cboCountryDestination.SelectedItem.ToString();
+                AllCountries countryDestination = (AllCountries)Enum.Parse(typeof(AllCountries), countryDestinationString);
+
                 if (cboTripOrVacation.SelectedItem.ToString() == "Vacation")
                 {
                     //Create vacation
